@@ -1,0 +1,1062 @@
+/* Global reset */
+
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+    background-color: #1a1a2e !important;
+}
+
+/* Universal box-sizing for all elements */
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* Main App Container */
+.App {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1a1a2e; /* Dark background */
+    color: #e0e0e0; /* Light text for general elements */
+}
+
+/* Home Page Container - Takes full width available within the App */
+.home-page-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Header styling (for Home page) */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #1a1a2e; /* Match app background or slightly darker */
+    border-bottom: 1px solid #333; /* Darker border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Darker shadow */
+    margin-bottom: 20px;
+    border-radius: 8px;
+    width: 100%;
+    color: #e0e0e0; /* Ensure header text is light */
+}
+
+.welcome-message {
+    font-size: 1.8rem;
+    color: #e0e0e0; /* Light text for welcome message */
+    margin: 0;
+    font-weight: 600;
+}
+
+.logout-button {
+    background-color: #007bff; /* Blue for logout as seen in image */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.logout-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Main Content Grid for layout (Home Page) */
+.main-content-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Default to single column on small screens */
+    gap: 20px;
+    width: 100%;
+    grid-template-areas:
+        "left-col"
+        "right-col"
+        "table";
+}
+
+/* --- LAYOUT WRAPPERS & CHART STYLES --- */
+
+.left-column {
+    grid-area: left-col;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-column {
+    grid-area: right-col;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Responsive grid for larger screens (768px and up) */
+@media (min-width: 768px) {
+    .main-content-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "left-col right-col" 
+            "table table"; 
+    }
+}
+
+.transactions-section {
+    grid-area: table; 
+}
+
+/* CHART SPECIFIC STYLING */
+.chart-section {
+    min-height: 350px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* No specific background or text changes here, inherits section-card */
+}
+
+.chart-title {
+    font-size: 1.4rem;
+    color: #e0e0e0; /* Light text for chart title */
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+    width: 100%;
+}
+
+.no-chart-data {
+    padding: 20px;
+    color: #b0b0b0; /* Lighter grey for no data message */
+    font-style: italic;
+    text-align: center;
+}
+/* --- END NEW LAYOUT WRAPPERS & CHART STYLES --- */
+
+
+/* General card styling for sections */
+.section-card {
+    background-color: #2a2a3e; /* Darker card background */
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Darker shadow */
+    transition: all 0.2s ease-in-out;
+    color: #e0e0e0; /* Light text inside cards */
+}
+
+.section-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Even darker shadow on hover */
+}
+
+/* Search bar styling (Home Page) */
+.search-bar-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #2a2a3e; /* Match card background */
+    border-radius: 5px;
+    border: 1px solid #3a3a5e; /* Darker border */
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #3a3a5e; /* Darker border */
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #e0e0e0; /* Light text input */
+    background-color: #1a1a2e; /* Even darker input background */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.search-input::placeholder {
+    color: #b0b0b0; /* Light grey placeholder */
+}
+
+.search-input:focus {
+    border-color: #007bff; /* Blue focus border */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* ExpenseDetails Card */
+.expense-details-card {
+    text-align: center;
+}
+
+.expense-details-card .card-title {
+    font-size: 1.5rem;
+    color: #e0e0e0; /* Light text for card title */
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.balance-amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.positive-balance {
+    color: #28a745; /* Green for positive */
+}
+
+.negative-balance {
+    color: #dc3545; /* Red for negative */
+}
+
+/* Amounts Summary Grid (Income/Expense Boxes) */
+.amounts-summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-top: 1px solid #3a3a5e; /* Darker border */
+    border-bottom: 1px solid #3a3a5e; /* Darker border */
+    margin-bottom: 25px;
+}
+
+.income-box, .expense-box {
+    background-color: #1a1a2e; /* Darker box background */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); /* Darker inner shadow */
+}
+
+.summary-label {
+    font-size: 1rem;
+    color: #b0b0b0; /* Light grey for labels */
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.summary-value {
+    font-size: 1.8rem;
+    font-weight: 600;
+    display: block;
+}
+
+.summary-value.income {
+    color: #28a745; /* Green */
+}
+
+.summary-value.expense {
+    color: #dc3545; /* Red */
+}
+
+/* Transaction History (inside ExpenseDetails) */
+.transaction-history-heading {
+    font-size: 1.3rem;
+    color: #e0e0e0; /* Light text */
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #555; /* Darker dashed border */
+}
+
+.transaction-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #3a3a5e; /* Darker border */
+    border-radius: 8px;
+    background-color: #2a2a3e; /* Darker list background */
+}
+
+/* Scrollbar styling for transaction list */
+.transaction-list::-webkit-scrollbar {
+    width: 8px;
+}
+.transaction-list::-webkit-scrollbar-thumb {
+    background-color: #555; /* Dark scrollbar thumb */
+    border-radius: 4px;
+}
+.transaction-list::-webkit-scrollbar-track {
+    background-color: #333; /* Dark scrollbar track */
+    border-radius: 4px;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #3a3a5e; /* Darker item border */
+    background-color: #2a2a3e; /* Match list background */
+    transition: background-color 0.2s ease;
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-item:hover {
+    background-color: #333; /* Slightly lighter on hover */
+}
+
+.transaction-item.plus {
+    border-left: 5px solid #28a745; /* Green border */
+}
+
+.transaction-item.minus {
+    border-left: 5px solid #dc3545; /* Red border */
+}
+
+.transaction-text {
+    flex-grow: 1;
+    text-align: left;
+    font-weight: 500;
+    color: #e0e0e0; /* Light text */
+}
+
+.transaction-date {
+    font-size: 0.85rem;
+    color: #b0b0b0; /* Light grey date */
+    margin-left: 15px;
+    white-space: nowrap;
+}
+
+.transaction-amount {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-left: 15px;
+    min-width: 80px;
+    text-align: right;
+}
+
+.no-transactions-message {
+    padding: 20px;
+    color: #b0b0b0; /* Light grey message */
+    font-style: italic;
+    text-align: center;
+    background-color: #2a2a3e; /* Darker background */
+    border-radius: 8px;
+}
+
+
+/* Expense Form Container */
+.expense-form-container .form-title {
+    font-size: 1.5rem;
+    color: #e0e0e0; /* Light text for form title */
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 0.95rem;
+    color: #e0e0e0; /* Light text for labels */
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-input,
+.form-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #3a3a5e; /* Darker border */
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #e0e0e0; /* Light text */
+    background-color: #1a1a2e; /* Darker input background */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Custom arrow for select dropdown */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23e0e0e0' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E"); /* Light arrow */
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+}
+
+.form-input::placeholder {
+    color: #b0b0b0; /* Light grey placeholder */
+}
+
+.form-input:focus,
+.form-select:focus {
+    border-color: #007bff; /* Blue focus border */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.submit-button {
+    background: linear-gradient(90deg, #007bff, #0056b3); /* Blue gradient for submit */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.submit-button:hover {
+    background: linear-gradient(90deg, #0056b3, #004085); /* Darker blue gradient on hover */
+    transform: translateY(-1px);
+}
+
+.submit-button:active {
+    background: linear-gradient(90deg, #004085, #003366); 
+    transform: translateY(0);
+}
+
+
+/* Transactions Table Container (for ExpenseTable) */
+.transactions-table-container .table-title {
+    font-size: 1.5rem;
+    color: #e0e0e0; /* Light text for table title */
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #3a3a5e; /* Darker border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Darker shadow */
+}
+
+.expense-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.expense-table thead {
+    background-color: #333; /* Darker header background */
+    color: #e0e0e0; /* Light header text */
+}
+
+.expense-table th {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #b0b0b0; /* Light grey header text */
+    font-weight: 600;
+    border-bottom: 2px solid #555; /* Darker border */
+}
+
+.expense-table th:first-child {
+    width: 40px;
+    text-align: center;
+}
+
+.expense-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #3a3a5e; /* Darker border */
+    vertical-align: middle;
+    font-size: 0.95rem;
+    color: #e0e0e0; /* Light text */
+}
+
+.expense-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.expense-table tbody tr:hover {
+    background-color: #333; /* Darker row hover */
+}
+
+/* Specific cell styling */
+.delete-cell {
+    text-align: center;
+    width: 40px;
+}
+
+.delete-button {
+    background-color: #dc3545; /* Red delete button */
+    color: white;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.delete-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+    transform: scale(1.05);
+}
+.delete-button:active {
+    background-color: #bd2130;
+    transform: scale(0.95);
+}
+
+.expense-description-cell {
+    font-weight: 500;
+}
+
+.expense-date-cell {
+    color: #b0b0b0; /* Light grey date */
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.expense-amount-cell {
+    text-align: right;
+    font-weight: 600;
+    font-size: 1.05rem;
+    white-space: nowrap;
+}
+
+/* Conditional coloring for amount cells */
+.expense-row.plus .expense-amount-cell {
+    color: #28a745; /* Green */
+}
+
+.expense-row.minus .expense-amount-cell {
+    color: #dc3545; /* Red */
+}
+
+/* No transactions message */
+.transactions-table-container .no-transactions-message {
+    padding: 30px;
+    color: #b0b0b0; /* Light grey message */
+    font-style: italic;
+    text-align: center;
+    background-color: #2a2a3e; /* Darker background */
+    border-radius: 8px;
+    border: 1px dashed #555; /* Darker dashed border */
+}
+
+
+/* Auth Pages (Login & Signup) */
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #2a2a3e; /* Dark card background */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Darker shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    color: #e0e0e0; /* Light text */
+}
+
+/* Force dark background for auth pages */
+body {
+    background-color: #1a1a2e !important;
+}
+
+#root {
+    background-color: #1a1a2e !important;
+}
+
+.auth-title {
+    font-size: 2rem;
+    color: #e0e0e0; /* Light title */
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.auth-subtitle {
+    font-size: 1rem;
+    color: #b0b0b0; /* Light grey subtitle */
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.auth-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.auth-button {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    margin-top: 10px;
+}
+
+.auth-button.primary {
+    background-color: #007bff; /* Blue button */
+    color: white;
+}
+
+.auth-button.primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-1px);
+}
+.auth-button.primary:active {
+    background-color: #004085;
+    transform: translateY(0);
+}
+
+.auth-switch-link {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #b0b0b0; /* Light grey link text */
+}
+
+.auth-link {
+    color: #007bff; /* Blue link */
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: color 0.2s ease-in-out;
+}
+
+.auth-link:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline;
+}
+
+/* ===== NEW DASHBOARD LAYOUT STYLES ===== */
+
+/* Main App Layout with Sidebar */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #1a1a2e;
+  color: #e0e0e0;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  color: #e0e0e0;
+  padding: 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 1000;
+  border-right: 1px solid #2a2a3e;
+}
+
+.sidebar-header {
+  padding: 30px 25px;
+  border-bottom: 1px solid #2a2a3e;
+  text-align: center;
+}
+
+.sidebar-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e0e0e0;
+  margin: 0;
+}
+
+.sidebar-user {
+  padding: 20px 25px;
+  border-bottom: 1px solid #2a2a3e;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #007bff, #0056b3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+}
+
+.user-info h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+.user-info p {
+  margin: 2px 0 0 0;
+  font-size: 0.85rem;
+  color: #b0b0b0;
+}
+
+.sidebar-nav {
+  padding: 20px 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 25px;
+  color: #b0b0b0;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background-color: #2a2a3e;
+  color: #e0e0e0;
+  border-left-color: #007bff;
+}
+
+.nav-item.active {
+  background-color: #2a2a3e;
+  color: #e0e0e0;
+  border-left-color: #007bff;
+}
+
+.nav-icon {
+  margin-right: 12px;
+  font-size: 1.2rem;
+  width: 20px;
+  text-align: center;
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  margin-left: 260px;
+  background-color: #1a1a2e;
+  min-height: 100vh;
+}
+
+/* Top Header */
+.top-header {
+  background: #2a2a3e;
+  padding: 15px 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #3a3a5e;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #e0e0e0;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.header-button:hover {
+  background: #0056b3;
+}
+
+/* Content Area */
+.content-area {
+  padding: 30px;
+}
+
+/* Dashboard Grid Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+/* Summary Cards */
+.summary-card {
+  background: #2a2a3e;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-left: 4px solid;
+  color: #e0e0e0;
+}
+
+.summary-card.income {
+  border-left-color: #28a745;
+}
+
+.summary-card.expense {
+  border-left-color: #dc3545;
+}
+
+.summary-card.balance {
+  border-left-color: #007bff;
+}
+
+.card-title {
+  font-size: 0.9rem;
+  color: #b0b0b0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 10px 0;
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.card-value.positive {
+  color: #28a745;
+}
+
+.card-value.negative {
+  color: #dc3545;
+}
+
+.card-value.neutral {
+  color: #007bff;
+}
+
+/* Chart Containers */
+.chart-container {
+  background: #2a2a3e;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 25px;
+  color: #e0e0e0;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.chart-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #e0e0e0;
+  margin: 0;
+}
+
+.chart-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Recent Transactions */
+.recent-transactions {
+  background: #2a2a3e;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #e0e0e0;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #3a3a5e;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.transaction-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.transaction-icon.income {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+}
+
+.transaction-icon.expense {
+  background: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+}
+
+.transaction-details h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+.transaction-details p {
+  margin: 2px 0 0 0;
+  font-size: 0.85rem;
+  color: #b0b0b0;
+}
+
+.transaction-amount {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.transaction-amount.income {
+  color: #28a745;
+}
+
+.transaction-amount.expense {
+  color: #dc3545;
+}
+
+/* Form Styles for Add Income/Expense */
+.form-container {
+  background: #2a2a3e;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 25px;
+  color: #e0e0e0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Filter Section */
+.filter-section {
+  background: #2a2a3e;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 25px;
+  color: #e0e0e0;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  align-items: end;
+}
+
+/* Form inputs - Dark Theme */
+.form-container .form-input,
+.form-container .form-select {
+  background-color: #1a1a2e;
+  color: #e0e0e0;
+  border: 1px solid #3a3a5e;
+}
+
+.form-container .form-input::placeholder {
+  color: #b0b0b0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .top-header {
+    padding: 15px 20px;
+  }
+  
+  .content-area {
+    padding: 20px;
+  }
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Empty States */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #b0b0b0;
+}
+
+.empty-state p {
+  margin: 0;
+  font-style: italic;
+}
